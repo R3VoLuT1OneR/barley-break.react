@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 
     var view = React.renderToString(IndexPageFactory(data));
 
-    res.render('index', { view: view, data: JSON.stringify(false) });
+    res.render('index', { view: view, data: JSON.stringify(data) });
 });
 
 module.exports = router;
