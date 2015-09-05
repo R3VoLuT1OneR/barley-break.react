@@ -1,0 +1,73 @@
+.num {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  background: #f0f0f0;
+  border: 1px solid;
+  cursor: pointer;
+
+  &.movable {
+    background: #f0fff0;
+  }
+
+  &:hover {
+    background: #fff0f0;
+  }
+
+  &:empty {
+    background: none;
+    border-color: transparent;
+    cursor: auto;
+  }
+
+  &:active {
+    transition: background-color 1000ms step-end;
+  }
+
+  &.move-up {
+    animation: moveUp 0.3s 1 linear forwards;
+  }
+  &.move-down {
+    animation: moveDown 0.3s 1 linear forwards;
+  }
+  &.move-right {
+    animation: moveRight 0.3s 1 linear forwards;
+  }
+  &.move-left {
+    animation: moveLeft 0.3s 1 linear forwards;
+  }
+}
+
+@keyframes moveUp {
+  from {
+    transform: translate(0,50px);
+  }
+  to {
+    transform: translate(0,0);
+  }
+}
+@keyframes moveDown {
+  from {
+    transform: translate(0,-50px);
+  }
+  to {
+    transform: translate(0,0);
+  }
+}
+@keyframes moveRight {
+  from {
+    transform: translate(50px);
+  }
+  to {
+    transform: translate(0);
+  }
+}
+@keyframes moveLeft {
+  from {
+    transform: translate(-50px);
+  }
+  to {
+    transform: translate(0);
+  }
+}

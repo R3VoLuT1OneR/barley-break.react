@@ -1,0 +1,9 @@
+{
+  "ignore": [
+    ".git/",
+    "node_modules/",
+    "public/"
+  ],
+  "ext": "js jsx",  
+  "verbose": true
+}
