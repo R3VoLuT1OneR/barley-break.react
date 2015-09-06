@@ -19,34 +19,39 @@ export default {
     },
 
     /**
-     * From wiki: https://ru.wikipedia.org/wiki/%D0%98%D0%B3%D1%80%D0%B0_%D0%B2_15
+     * From wiki: http://mathworld.wolfram.com/15Puzzle.html
      *
-     * Можно показать, что ровно половину из всех возможных 20 922 789 888 000 (=16!) начальных положений пятнашек
-     * невозможно привести к собранному виду: пусть квадратик с числом  i  расположен до (если считать слева направо и
-     * сверху вниз)  k  квадратиков с числами меньшими  i . Будем считать  n_i = k , то есть если после костяшки с i-м
-     * числом нет чисел, меньших i, то  k = 0. Также введем число e — номер ряда пустой клетки (считая с 1). Если сумма
-     * N = \sum_{i=1}^{15} n_i + e
-     * является нечётной, то решения головоломки не существует
+     * To address the solubility of a given initial arrangement, proceed as follows. If the square containing the number
+     * i appears "before" (reading the squares in the box from left to right and top to bottom) n numbers that are less
+     * than i, then call it an inversion of order n, and denote it n_i. Then define
+     *
+     * N=sum_(i=1)^(15)n_i=sum_(i=2)^(15)n_i,
+     *
+     * where the sum need run only from 2 to 15 rather than 1 to 15 since there are no numbers less than 1 (so n_1 must
+     * equal 0). Stated more simply,  N=i(p) is the number of permutation inversions in the list of numbers. Also define
+     * e to be the row number of the empty square.
+     *
+     * Then if N+e is even, the position is possible, otherwise it is not.
      */
     _checkBoard(board) {
         let Sum = 0, flatBoard = board[0].concat(board[1], board[2], board[3]);
 
         for (let i = 0; i < flatBoard.length; i++) {
             let value = flatBoard[i];
-            let Ni = 0;
 
             if (value === null) {
-                Sum +=  Math.floor(i/4) + 1;
+                Sum +=  Math.floor(i/4) + 1; // e
             } else {
+                let Ni = 0;
 
                 for (let ii = i+1; ii < flatBoard.length; ii++) {
-                    if (flatBoard[ii] < value) {
-                        Ni += flatBoard[ii];
+                    if (flatBoard[ii] !== null) {
+                        Ni += (flatBoard[ii] < value) ? 1 : 0;
                     }
                 }
-            }
 
-            Sum += Ni;
+                Sum += Ni;
+            }
         }
 
         return !(Sum % 2);
