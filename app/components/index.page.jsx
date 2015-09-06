@@ -1,6 +1,5 @@
 import React from 'react';
 import board from './board';
-import cnames from 'classnames';
 
 export default React.createClass({
 
@@ -43,7 +42,7 @@ export default React.createClass({
                                     <div
                                         onClick={this.onNumberClick(rowIndex, cellIndex)}
                                         key={cellIndex}
-                                        className={cnames('num', {movable: canMove}, direction)}
+                                        className={'num' + (canMove ? ' movable' : '') + (direction ? ' ' + direction : '')}
                                     >
                                         {number}
                                     </div>
