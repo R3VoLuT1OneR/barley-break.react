@@ -31,3 +31,7 @@ node_modules
 
 # Debug log from npm
 npm-debug.log
+
+# App
+/public/assets/js/app.js
+/public/assets/js/app.js.map
